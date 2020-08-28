@@ -26,10 +26,10 @@ class SettingDatabaseSeeder extends Seeder
             'outer_shipping_cost'=>0,
             'free_shipping_cost'=>0,
             'translatable'=>[
-                'store_name'=>'businessForAll',
-                'free_shipping_label'=>'free shipping',
-                'local_label'=>'local shipping',
-                'outer_label'=>'outer shipping',
+                'store_name'=>'ستارت أب',
+                'free_shipping_label'=>'شحن مجاني',
+                'local_label'=>'شحن داخلي',
+                'outer_label'=>'شحن خارجي',
             ],
 
 

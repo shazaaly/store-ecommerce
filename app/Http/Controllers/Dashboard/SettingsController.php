@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShippingsRequest;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -28,8 +29,8 @@ class SettingsController extends Controller
     }
 
 
-    public function updateShippingsMethods(Request $request, $id){
-
+    public function updateShippingsMethods(ShippingsRequest $request, $id){
+            return $request;
 
     }
 

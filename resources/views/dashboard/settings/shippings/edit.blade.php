@@ -24,62 +24,46 @@
                             <p style="color: rgb(12,165,230);" class="card-title" id="horz-layout-card-center">تعديل وسائل التوصيل: </p>
 
                         </div>
-                        <form  method="PUT" action="{{route('update.shippings.methods',$shippingMethod->id)}}" class="form form-horizontal">
+                        @include('dashboard.includes.alerts.errors')
+                        @include('dashboard.includes.alerts.success')
+
+                        <form  method="post" action="{{route('update.shippings.methods',$shippingMethod->id)}}" class="form form-horizontal">
                             @csrf
                             @method('PUT')
                             <div class="form-body">
                                 <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="eventRegInput1">Full Name</label>
+                                    <label class="col-md-3 label-control" for="eventRegInput1"></label>
                                     <div class="col-md-9">
                                         <input type="hidden" value="{{$shippingMethod->id}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="eventRegInput2">Title</label>
+                                    <label class="col-md-3 label-control" for="eventRegInput2">وسيلة التوصيل</label>
                                     <div class="col-md-9">
-                                        <input type="text" id="eventRegInput2" class="form-control" value="{{$shippingMethod->value}}" name="title">
+                                        <input type="text" id="eventRegInput2" class="form-control" value="{{$shippingMethod->value}}" name="value">
                                     </div>
+
+                                    @error('value')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="eventRegInput3">Company</label>
+                                    <label class="col-md-3 label-control" for="eventRegInput3">قيمة التوصيل</label>
                                     <div class="col-md-9">
-                                        <input type="text" id="eventRegInput3" class="form-control" placeholder="company" name="company">
+                                        <input type="number" id="eventRegInput3" class="form-control" value="{{$shippingMethod->plain_value}}" name="plain_value">
                                     </div>
+                                    @error('plain_value')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="eventRegInput4">Email</label>
-                                    <div class="col-md-9">
-                                        <input type="email" id="eventRegInput4" class="form-control" placeholder="email" name="email">
-                                    </div>`
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="eventRegInput5">Contact Number</label>
-                                    <div class="col-md-9">
-                                        <input type="tel" id="eventRegInput5" class="form-control" name="contact" placeholder="contact number">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 label-control">Existing Customer</label>
-                                    <div class="col-md-9">
-                                        <div class="input-group">
-                                            <div class="d-inline-block custom-control custom-radio mr-1">
-                                                <input type="radio" name="customer1" class="custom-control-input" checked="" id="yes">
-                                                <label class="custom-control-label" for="yes">Yes</label>
-                                            </div>
-                                            <div class="d-inline-block custom-control custom-radio">
-                                                <input type="radio" name="customer1" class="custom-control-input" id="no">
-                                                <label class="custom-control-label" for="no">No</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="form-actions center">
                                 <button type="button" class="btn btn-warning mr-1">
-                                    <i class="ft-x"></i> Cancel
+                                    <i class="ft-x"></i> تراجع
                                 </button>
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="la la-check-square-o"></i> Save
+                                    <i class="la la-check-square-o"></i> تحديث
                                 </button>
                             </div>
                         </form>
