@@ -34,6 +34,8 @@ Route::group(
         'namespace' => 'Dashboard', 'middleware' => 'auth:admin', 'prefix' => 'admin'], function () {
 //    routes accessible by admin
         Route::get('/', 'DashboardController@index')->name('admin.dashboard');
+        Route::get('logout', 'LoginController@logout')->name('admin.logout');
+
 
 //    ===============Start Settings=================//
         Route::group(['prefix' => 'settings'], function () {
