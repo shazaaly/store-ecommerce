@@ -41,16 +41,19 @@
                                     <label class="col-md-3 label-control" for="eventRegInput2">وسيلة التوصيل</label>
                                     <div class="col-md-9">
                                         <input type="text" id="eventRegInput2" class="form-control" value="{{$shippingMethod->value}}" name="value">
+                                        @error('value')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
 
-                                    @error('value')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
+
+
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 label-control" for="eventRegInput3">قيمة التوصيل</label>
                                     <div class="col-md-9">
                                         <input type="number" id="eventRegInput3" class="form-control" value="{{$shippingMethod->plain_value}}" name="plain_value">
+
                                     </div>
                                     @error('plain_value')
                                     <span class="text-danger">{{$message}}</span>

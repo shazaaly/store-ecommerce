@@ -25,7 +25,8 @@ class ShippingsRequest extends FormRequest
     {
         return [
             //
-            'value'=>'',
+            'value' => 'required',
+            'plain_value' => 'nullable|numeric',
         ];
     }
 
@@ -33,7 +34,10 @@ class ShippingsRequest extends FormRequest
     {
         return [
             //
-            'value'=>'',
+                'id' => 'required|exists:settings',
+                'value' => 'required',
+                'plain_value' => 'nullable|numeric',
+
         ];
     }
 }

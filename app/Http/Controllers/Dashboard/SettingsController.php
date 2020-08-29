@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ShippingsRequest;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SettingsController extends Controller
 {
@@ -25,15 +26,33 @@ class SettingsController extends Controller
             $shippingMethod = Setting::where('key', 'free_shipping_label')->first();
 
 //        return $shippingMethod;
-              return view('dashboard.settings.shippings.edit', compact('shippingMethod'));
+        return view('dashboard.settings.shippings.edit', compact('shippingMethod'));
     }
 
 
-    public function updateShippingsMethods(ShippingsRequest $request, $id){
-            return $request;
+    public function updateShippingsMethods(ShippingsRequest $request, $id)
+    {
+        try {
+            $shipping_methods = Setting::find($id);
+            DB::beginTransaction();
+            $shipping_methods->update([
+                'plain_value'=> $request->plain_value
+            ]);
+
+            $shipping_methods->value = $request->value;
+            $shipping_methods->save();
+
+            DB::commit();
+            return redirect()->back()->with(['success' => 'تم التحديث بنجاح']);
+
+        }catch (\Exception $ex){
+            DB::rollBack();
+            return redirect()->back()->with(['error' => 'هناك خطا ما يرجي المحاولة فيما بعد']);
+
+
+
+        }
+
 
     }
-
-
-
 }
