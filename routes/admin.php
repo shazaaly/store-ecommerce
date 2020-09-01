@@ -36,6 +36,14 @@ Route::group(
         Route::get('/', 'DashboardController@index')->name('admin.dashboard');
         Route::get('logout', 'LoginController@logout')->name('admin.logout');
 
+//        Admin profile setting//
+        Route::group(['prefix' => 'profile'], function () {
+            Route::get('edit', 'ProfileController@editProfile')->name('edit.profile');
+            Route::put('update', 'ProfileController@updateProfile')->name('update.profile');
+
+        });
+
+
 
 //    ===============Start Settings=================//
         Route::group(['prefix' => 'settings'], function () {

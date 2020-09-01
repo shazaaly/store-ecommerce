@@ -23,4 +23,8 @@ Route::get('admin', function () {
     return view('layouts.admin');
 });
 
+Route::get('test', function () {
+   return  \App\Models\Setting::find(57);
+});
+
 /*END test Routes*/
