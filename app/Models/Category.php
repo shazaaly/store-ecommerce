@@ -20,4 +20,24 @@ class Category extends Model
     ];
 //    /*to hide it from selection unless called in controller/*
     protected $hidden=['translations'];
-}
+
+    public function scopeParent($query){
+        return $query->whereNull('parent_id');
+    }
+
+    public function scopeChild($query){
+        return $query->whereNotNull('parent_id');
+    }
+
+
+    public  function getActive(){
+       return $this->is_active ==0 ? 'غير مفعل':'مفعل';
+
+    }
+
+
+
+
+
+
+    }
