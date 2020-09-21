@@ -32,6 +32,7 @@ class SettingsController extends Controller
 
     public function updateShippingsMethods(ShippingsRequest $request, $id)
     {
+
         try {
             $shipping_methods = Setting::find($id);
             DB::beginTransaction();

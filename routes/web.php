@@ -27,4 +27,11 @@ Route::get('test', function () {
    return  \App\Models\Setting::find(57);
 });
 
+Route::get('test1', function () {
+    $category=  \App\Models\Category::find(15);
+    $category->makeVisible(['translations']);
+    return $category;
+});
+
+
 /*END test Routes*/
