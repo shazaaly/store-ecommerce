@@ -75,6 +75,19 @@ Route::group(
 
         });
         ######################### End  Sub Categoris Routes  ########################
+
+        ######################### Begin Sub Categoris Routes ########################
+        Route::group(['prefix' => 'brands'], function () {
+            Route::get('/','BrandsController@index') -> name('dashboard.brands');
+            Route::get('create','BrandsController@create') -> name('dashboard.brands.create');
+            Route::post('store','BrandsController@store') -> name('dashboard.brands.store');
+            Route::get('edit/{id}','BrandsController@edit') -> name('dashboard.brands.edit');
+            Route::post('update/{id}','BrandsController@update') -> name('dashboard.brands.update');
+            Route::get('delete/{id}','BrandsController@destroy') -> name('dashboard.brands.delete');
+            Route::get('changeStatus/{id}','BrandsController@changeStatus') -> name('dashboard.brands.status');
+
+        });
+        ######################### End  Sub Categoris Routes  ########################
     });
 
 

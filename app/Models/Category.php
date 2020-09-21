@@ -35,6 +35,10 @@ class Category extends Model
 
     }
 
+    public function mainCategory(){
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
 
 
 

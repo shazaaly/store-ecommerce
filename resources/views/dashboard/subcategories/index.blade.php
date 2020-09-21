@@ -52,6 +52,8 @@
                                             <thead>
                                             <tr>
                                                 <th>القسم </th>
+                                                <th>القسم التابع له </th>
+
                                                 <th> الأسم في الرابط</th>
                                                 <th>الحالة</th>
                                                 <th>صوره القسم</th>
@@ -63,6 +65,8 @@
                                                 @foreach($categories as $category)
                                                     <tr>
                                                         <td>{{$category->name}}</td>
+{{--                                                        use relation in category model--}}
+                                                        <td>{{$category->mainCategory['name']}}</td>
 
                                                         <td>{{$category->slug}}</td>
                                                         <td>{{$category->getActive()}}</td>
