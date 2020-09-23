@@ -13,7 +13,7 @@
                                 </li>
                                 <li class="breadcrumb-item"><a href=""> الاقسام الفرعية </a>
                                 </li>
-                                <li class="breadcrumb-item active">تعديل قسم فرعي
+                                <li class="breadcrumb-item active">تعديل ماركة تجارية
                                 </li>
                             </ol>
                         </div>
@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> تعديل قسم فرعي :{{$category->name}} </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> تعديل ماركة تجارية :{{$brand->name}} </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -42,15 +42,18 @@
                                 @include('dashboard.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('dashboard.subcategories.update', $category->id)}}"
+                                        <form class="form" action="{{route('dashboard.brands.update', $brand->id)}}"
                                               method="POST"
                                               enctype="multipart/form-data">
+
                                             @csrf
                                             <div class="form-group">
-                                                <label> صوره القسم </label>
+                                                <label> صوره الماركة </label>
                                                 <label id="projectinput7" class="file center-block">
                                                     <input type="file" id="file" name="photo">
-                                                    <span class="file-custom"></span>
+                                                    <span class="file-custom">
+                                                        <img style="width: 150px; height: 100px;" src="{{$brand-> photo}}">
+                                                    </span>
                                                 </label>
                                                 @error('photo')
                                                 <span class="text-danger">{{$message}}</span>
@@ -59,14 +62,14 @@
 
                                             <div class="form-body">
 
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات القسم </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الماركة </h4>
 
 
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> اسم القسم  </label>
-                                                            <input type="text" value="{{$category->name}}" id="name"
+                                                            <input type="text" value="{{$brand->name}}" id="name"
                                                                    class="form-control"
                                                                    placeholder="  "
                                                                    name="name">
@@ -75,20 +78,6 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> اسم الرابط  </label>
-                                                            <input type="text" value="{{$category->slug}}" id="name"
-                                                                   class="form-control"
-                                                                   placeholder="  "
-                                                                   name="slug">
-                                                            @error("slug")
-                                                            <span class="text-danger"> هذا الحقل مطلوب</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
 
 
                                                 </div>
@@ -102,7 +91,8 @@
                                                                name="is_active"
                                                                id="switcheryColor4"
                                                                class="switchery" data-color="success"
-                                                               checked/>
+                                                            @if($brand->is_active ==1 )
+                                                               checked @endif/>
                                                         <label for="switcheryColor4"
                                                                class="card-title ml-1">الحالة   </label>
 
@@ -114,24 +104,6 @@
                                             </div>
 
                                             {{--                                            chech cat type--}}
-
-                                            <div class="form-group col-md-6 mb-2">
-                                                <label for="projectinput6">اختر القسم الرئيسي التابع له</label>
-                                                <select id="projectinput6" name="parent_id" class="form-control">
-                                                    <option value="none" selected="" disabled="">تابع لقسم : </option>
-                                                    @if($categories && $categories->count() >  0)
-                                                        @foreach($categories as $mainCategory)
-                                                            <option value="{{$mainCategory->id}}" @if($mainCategory->id == $category->parent_id )  selected @endif> {{$mainCategory->name}} </option>
-                                                        @endforeach
-                                                    @endif
-
-                                                    @error("parent_id")
-                                                    <span class="text-danger">{{$message}} </span>
-                                                    @enderror
-                                                </select>
-
-                                            </div>
-
 
                                             <div class="form-actions">
 

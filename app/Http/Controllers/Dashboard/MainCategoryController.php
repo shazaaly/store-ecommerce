@@ -12,7 +12,7 @@ class MainCategoryController extends Controller
     //
     public function index()
     {
-        $categories = Category::orderBy('id', 'DESC')->parent()->paginate(PAGINATION_COUNT);    //*scopeParent ()  in Model*/
+        $categories = Category::orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);    //*scopeParent ()  in Model*/
 
         return view('dashboard.categories.index', compact('categories'));
     }
@@ -21,8 +21,8 @@ class MainCategoryController extends Controller
 
    public function create()
     {
-        $mainCategories = Category::get()->where('parent_id', null);    /*scopeParent ()  in Model*/
-        return view('dashboard.categories.create', compact('mainCategories'));
+        $categories =   Category::select('id','parent_id')->get();
+        return view('dashboard.categories.create', compact('categories'));
     }
 
 
@@ -37,10 +37,16 @@ class MainCategoryController extends Controller
             else
                 $request->request->add(['is_active' => 1]);
 
+
+//            Remove parent_id  from request if main cat is checked//
+            if($request -> type == 1) //main category
+            {
+                $request->request->add(['parent_id' => null]);
+            }
+
             $category = Category::create($request->except('_token'));
 //         save translation == name (Translatable attribute in Model)//
             $category->name = $request->name;
-            $category->parent_id = $request->mainCategory;
             $category->save();
             DB::commit();
 
