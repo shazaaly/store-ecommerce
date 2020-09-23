@@ -23,12 +23,20 @@ class BrandRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-            'name' => 'required',
-            'photo' => 'required|mimes:jpg,jpeg,png',
 
-        ];
+        if ($this->isMethod('POST')){    //create
+
+            return [
+                'name' => 'required',
+                'photo' => 'required|mimes:jpg,jpeg,png'
+            ];
+        }else{
+            return [
+                'name' => 'required',
+                'photo' =>'nullable|mimes:jpg,jpeg,png'
+            ];
+        }
+
     }
 
     public function messages()
@@ -36,7 +44,7 @@ class BrandRequest extends FormRequest
         return [
             //
             "name.required" => "اسم القسم مطلوب",
-            "photo.required" => "حقل الصورة مطلوب",
+//            "photo.required" => "حقل الصورة مطلوب",
         ];
     }
 }

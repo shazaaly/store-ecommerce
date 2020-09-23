@@ -53,7 +53,6 @@
                                             <tr>
                                                 <th>القسم </th>
                                                 <th>تابع لقسم: </th>
-
                                                 <th> الأسم في الرابط</th>
                                                 <th>الحالة</th>
                                                 <th>صوره القسم</th>
@@ -68,9 +67,10 @@
                                                     <tr>
                                                         <td>{{$category->name}}</td>
 
-                                                        @if($category->parent_id === $category->id)
-                                                        <td>{{$category->name}}</td>
-                                                        @endif
+                                                        <td>
+{{--                                                          mainCategory  relation in model--}}
+                                                            {{$category->mainCategory->name ??'لا يوجد'}}
+                                                        </td>
 
                                                         <td>{{$category->slug}} </td>
                                                         <td>{{$category->getActive()}}</td>

@@ -66,7 +66,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1"> اسم القسم  </label>
-                                                                    <input type="text" value="{{old('name')}}" id="name"
+                                                                    <input type="text" value="" id="name"
                                                                            class="form-control"
                                                                            placeholder="  "
                                                                            name="name">
@@ -79,7 +79,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1"> اسم الرابط  </label>
-                                                                    <input type="text" value="{{old('slug')}}" id="name"
+                                                                    <input type="text" value="" id="name"
                                                                            class="form-control"
                                                                            placeholder="  "
                                                                            name="slug">
@@ -88,15 +88,36 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
+{{--                                                            choose main Cat div class hidden --}}
+                                                            <div class="row hidden" id="cats_list" >
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="projectinput1"> اختر القسم الرئيسي
+                                                                        </label>
+                                                                        <select name="parent_id" class="select2 form-control">
+                                                                            <optgroup label="">
+                                                                                @if($categories && $categories -> count() > 0)
+                                                                                    @foreach($categories as $category)
+                                                                                        <option
+                                                                                            value="{{$category -> id }}">{{$category -> name}}</option>
+                                                                                    @endforeach
+                                                                                @endif
+                                                                            </optgroup>
+                                                                        </select>
+                                                                        @error('parent_id')
+                                                                        <span class="text-danger"> {{$message}}</span>
+                                                                        @enderror
 
-
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
                                                         </div>
 
 
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-3">
                                                                 <div class="form-group mt-1">
                                                                     <input type="checkbox" value="1"
                                                                            name="is_active"
@@ -111,22 +132,45 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
+{{--                                                            Radio Buttons--}}
+                                                            <div class="col-md-3">
+                                                                <div class="form-group mt-1">
+                                                                    <input type="radio"
+                                                                           name="type"
+                                                                           value="1"
+                                                                           checked
+                                                                           class="switchery"
+                                                                           data-color="success"
+                                                                    />
+
+                                                                    <label
+                                                                        class="card-title ml-1">
+                                                                        قسم رئيسي
+                                                                    </label>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="form-group mt-1">
+                                                                    <input type="radio"
+                                                                           name="type"
+                                                                           value="2"
+                                                                           class="switchery" data-color="success"
+                                                                    />
+
+                                                                    <label
+                                                                        class="card-title ml-1">
+                                                                        قسم فرعي
+                                                                    </label>
+
+                                                                </div>
+                                                            </div>
+
+
                                                         </div>
 
 {{--                                            chech cat type--}}
 
-                                            <div class="form-group col-md-6 mb-2">
-                                                <label for="projectinput6">اختر القسم الرئيسي التابع له</label>
-                                                <select id="projectinput6" name="mainCategory" class="form-control">
-                                                    <option value="none" selected="" disabled="">تابع لقسم : </option>
-                                                    @isset($maiCategories)
-                                                        @foreach($mainCategories as $mainCategory)
-                                                    <option value="{{$mainCategory->id}}">{{$mainCategory->name}}</option>
-                                                        @endforeach
-                                                            @endisset
-
-                                                </select>
-                                            </div>
 
 
                                             <div class="form-actions">
@@ -150,5 +194,18 @@
             </div>
         </div>
     </div>
+
+@endsection
+@section('script')
+    <script>
+        $('input:radio[name="type"]').change(
+            function(){
+                if (this.checked && this.value == '2') {  // 1 if main cat - 2 if sub cat
+                    $('#cats_list').removeClass('hidden');
+                }else{
+                    $('#cats_list').addClass('hidden');
+                }
+            });
+    </script>
 
 @endsection

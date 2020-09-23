@@ -54,4 +54,69 @@ class BrandsController extends Controller
 
     }
 
+    public function edit($id)
+    {
+        $brand = Brand::find($id);
+        if (!$brand) {
+            return redirect()->back()->with(['error' => 'هذه الماركة التجارية غير موجود']);
+
+        }
+        return view('dashboard.brands.edit', compact('brand'));
+
+    }
+    public function update(BrandRequest $request, $id)
+    {
+//      return $request;
+
+        try {
+            $brand = Brand::find($id);
+            if (!$brand) {
+                return redirect()->back()->with(['error' => 'هذا القسم غير موجود']);
+            }
+            if (!$request->has('is_active'))
+                $request->request->add(['is_active' => 0]);
+            else
+                $request->request->add(['is_active' => 1]);
+
+            DB::beginTransaction();
+
+//update photo
+            if ($request->has('photo')){
+                $filename = uploadImage('brands', $request->photo);
+                Brand::where('id', $id)->update([
+                    'photo'=>$filename
+                ]);
+            }
+
+
+            $brand->update($request->except('token','id', 'photo'));
+//save translation://
+            $brand->name = $request->name;
+            $brand->save();
+            DB::commit();
+
+            return redirect()->route('dashboard.brands')->with(['success' => 'تم التحديث بنجاح']);
+        } catch (\Exception $ex) {
+            return $ex;
+            DB::rollBack();
+            return redirect()->back()->with(['error' => 'خطأ في تجديث البيانات']);
+        }
+
+    }
+    public function destroy($id)
+    {
+        $brand = Brand::find($id);
+        if (!$brand) {
+            return redirect()->back()->with(['error' => 'هذا القسم غير موجود']);
+
+        }
+        $brand->delete();
+        return redirect()->route('dashboard.brands')->with(['success' => 'تم الحذف بنجاح']);
+
+
+    }
+
+
+
+
 }

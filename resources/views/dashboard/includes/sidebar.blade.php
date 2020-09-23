@@ -23,47 +23,64 @@
             </li>
 
 
-            <li class="nav-item"><a href="{{route('dashboard.categories.index')}}"><i class="la la-group"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">الاقسام الرئيسيه </span>
+            <li class="nav-item"><a href=""><i class="la la-group"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">الاقسام  </span>
                     <span
-                        class="badge badge badge-danger badge-pill float-right mr-2">{{App\Models\Category::parent()->count()}}</span>
+                        class="badge badge badge-danger badge-pill float-right mr-2">{{\App\Models\Category::count()}} </span>
                 </a>
                 <ul class="menu-content">
                     <li class="active"><a class="menu-item" href="{{route('dashboard.categories.index')}}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
                     <li><a class="menu-item" href="{{route('dashboard.categories.create')}}" data-i18n="nav.dash.crypto">أضافة
-                             قسم جديد </a>
+                            قسم جديد </a>
                     </li>
                 </ul>
             </li>
+
 
             <li class="nav-item"><a href=""><i class="la la-group"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">الاقسام الفرعية   </span>
+                    <span class="menu-title" data-i18n="nav.dash.main"> الماركات التجارية  </span>
                     <span
-                        class="badge badge badge-danger badge-pill float-right mr-2">{{App\Models\Category::child()->count()}}</span>
-                </a>
-                <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href="{{route('dashboard.subcategories')}}"
-                                          data-i18n="nav.dash.ecommerce"> عرض الكل </a>
-                    </li>
-                    <li><a class="menu-item" href="{{route('dashboard.subcategories.create')}}" data-i18n="nav.dash.crypto">أضافة
-                            قسم فرعي جديد </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="nav-item"><a href=""><i class="la la-male"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">الماركات التجارية </span>
-                    <span
-                        class="badge badge badge-success badge-pill float-right mr-2"></span>
+                        class="badge badge badge-danger badge-pill float-right mr-2">{{\App\Models\Brand::count()}}</span>
                 </a>
                 <ul class="menu-content">
                     <li class="active"><a class="menu-item" href="{{route('dashboard.brands')}}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
                     <li><a class="menu-item" href="{{route('dashboard.brands.create')}}" data-i18n="nav.dash.crypto">أضافة
-                            ماركة جديدة  </a>
+                            ماركة جديده </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="nav-item"><a href=""><i class="la la-group"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main"> العلامات tags  </span>
+                    <span
+                        class="badge badge badge-danger badge-pill float-right mr-2"></span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active"><a class="menu-item" href="{{route('dashboard.tags')}}"
+                                          data-i18nhgt="nav.dash.ecommerce"> عرض الكل </a>
+                    </li>
+                    <li><a class="menu-item" href="{{route('dashboard.tags.create')}}" data-i18n="nav.dash.crypto">أضافة
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item"><a href=""><i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">المتاجر  </span>
+                    <span
+                        class="badge badge badge-success badge-pill float-right mr-2"> </span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active"><a class="menu-item" href=" "
+                                          data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                    </li>
+                    <li><a class="menu-item" href=" " data-i18n="nav.dash.crypto">أضافة
+                            متجر  </a>
                     </li>
                 </ul>
             </li>
@@ -99,34 +116,21 @@
             </li>
 
 
-            <li class=" nav-item">
-                <a href="#"><i class="la la-television"></i>
-                    <span class="menu-title"
-                          data-i18n="nav.templates.main">{{__('Admin/sideBar.settings')}}</span></a>
+            <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
+                                                                                    data-i18n="nav.templates.main"> {{__('admin/sidebar.settings')}}</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">{{__('Admin/sideBar.shipping methods')}}</a>
+                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main"> {{__('admin/sidebar.shipping methods')}} </a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href="{{route('edit.shippings.methods', 'free')}}"
-                                   data-i18n="nav.templates.vert.classic_menu">{{__('Admin/sideBar.Free Shipping')}}</a>
+                            <li><a class="menu-item" href="{{route('edit.shippings.methods','free')}}"
+                                   data-i18n="nav.templates.vert.classic_menu">توصيل مجاني </a>
                             </li>
-                            <li><a class="menu-item" href="{{route('edit.shippings.methods', 'inner')}}">{{__('Admin/sideBar.Internal Shipping')}}</a>
+                            <li><a class="menu-item" href="{{route('edit.shippings.methods','inner')}}">  توصيل داخلي </a>
                             </li>
-                            <li><a class="menu-item" href="{{route('edit.shippings.methods', 'outer')}}"
-                                   data-i18n="nav.templates.vert.compact_menu">{{__('Admin/sideBar.External Shipping')}}</a>
+                            <li><a class="menu-item" href="{{route('edit.shippings.methods','outer')}}"
+                                   data-i18n="nav.templates.vert.compact_menu">  توصيل خارجي </a>
                             </li>
-
                         </ul>
                     </li>
-{{--                    <li><a class="menu-item" href="#" data-i18n="nav.templates.horz.main">Horizontal</a>--}}
-{{--                        <ul class="menu-content">--}}
-{{--                            <li><a class="menu-item" href="../horizontal-menu-template"--}}
-{{--                                   data-i18n="nav.templates.horz.classic">Classic</a>--}}
-{{--                            </li>--}}
-{{--                            <li><a class="menu-item" href="../horizontal-menu-template-nav"--}}
-{{--                                   data-i18n="nav.templates.horz.top_icon">Full Width</a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
                 </ul>
             </li>
             <li class=" navigation-header">

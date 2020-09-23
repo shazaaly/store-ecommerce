@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description"
           content="Modern admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities with bitcoin dashboard.">
+
     <meta name="keywords"
           content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
     <meta name="author" content="PIXINVENT">
@@ -52,7 +53,6 @@
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/'.getFolder().'/style-rtl.css')}}">
     <!-- END Custom CSS-->
-    @notify_css
     @yield('style')
     <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
     <style>
@@ -65,15 +65,15 @@
       data-open="click" data-menu="vertical-menu" data-col="2-columns">
 <!-- fixed-top-->
 @include('dashboard.includes.header')
-<!-- ////////////////////////////////////////////////////////////////////////////-->
 @include('dashboard.includes.sidebar')
+<!-- ////////////////////////////////////////////////////////////////////////////-->
 
 @yield('content')
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 @include('dashboard.includes.footer')
 
-@notify_js
-@notify_render
+{{--@notify_js--}}
+{{--@notify_render--}}
 
 <!-- BEGIN VENDOR JS-->
 <script src="{{asset('assets/admin/vendors/js/vendors.min.js')}}" type="text/javascript"></script>
