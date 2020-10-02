@@ -89,7 +89,7 @@ Route::group(
         });
         ######################### End  Sub Categoris Routes  ########################
 
-        ######################### Begin Sub tags Routes ########################
+        ######################### Begin  tags Routes ########################
         Route::group(['prefix' => 'tags'], function () {
             Route::get('/','TagsController@index') -> name('dashboard.tags');
             Route::get('create','TagsController@create') -> name('dashboard.tags.create');
@@ -98,6 +98,18 @@ Route::group(
             Route::post('update/{id}','TagsController@update') -> name('dashboard.tags.update');
             Route::get('delete/{id}','TagsController@destroy') -> name('dashboard.tags.delete');
             Route::get('changeStatus/{id}','TagsController@changeStatus') -> name('dashboard.tags.status');
+
+        });
+        ######################### End  Sub tags Routes  ########################
+        ######################### Begin  products Routes ########################
+        Route::group(['prefix' => 'products'], function () {
+            Route::get('/','ProductsController@index') -> name('dashboard.products');
+            Route::get('general-information','ProductsController@create') -> name('dashboard.products.general.create');
+            Route::post('store-general-information','ProductsController@store') -> name('dashboard.products.general.store');
+//            Route::get('edit/{id}','TagsController@edit') -> name('dashboard.tags.edit');
+//            Route::post('update/{id}','TagsController@update') -> name('dashboard.tags.update');
+//            Route::get('delete/{id}','TagsController@destroy') -> name('dashboard.tags.delete');
+//            Route::get('changeStatus/{id}','TagsController@changeStatus') -> name('dashboard.tags.status');
 
         });
         ######################### End  Sub tags Routes  ########################
