@@ -4,32 +4,39 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Enumeration\CategoryType;
+use App\Http\Requests\GeneralProductRequest;
 use App\Http\Requests\MainCategoryRequest;
+use App\models\Brand;
 use App\Models\Category;
+use App\models\Product;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-class MainCategoryController extends Controller
+class ProductsController extends Controller
 {
     //
     public function index()
     {
-        $categories = Category::orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);    //*scopeParent ()  in Model*/
 
-        return view('dashboard.categories.index', compact('categories'));
     }
 
 
 
    public function create()
     {
-        $categories =   Category::select('id','parent_id')->get();
-        return view('dashboard.categories.create', compact('categories'));
+        $data =[];
+        $data['brands'] = Brand::active()->select('id')->get();
+        $data['tags'] = Tag::select('id')->get();
+        $data['categories'] = Category::active()->select('id')->get();
+//        return  $data;
+        return view('dashboard.products.general.create', $data);
     }
 
 
 
-    public function store(MainCategoryRequest $request)
+    public function store(GeneralProductRequest $request)
     {
+    //   return $request;
         try {
 
             DB::beginTransaction();
@@ -45,13 +52,13 @@ class MainCategoryController extends Controller
                 $request->request->add(['parent_id' => null]);
             }
 
-            $category = Category::create($request->except('_token'));
+            $product = Product::create($request->except('_token'));
 //         save translation == name (Translatable attribute in Model)//
-            $category->name = $request->name;
-            $category->save();
+            $product->name = $request->name;
+            $product->save();
             DB::commit();
 
-            return redirect()->route('dashboard.categories.index')->with(['success' => 'تمت إضافه قسم جديد بنجاح']);
+            return redirect()->route('dashboard.products')->with(['success' => 'تمت إضافه قسم جديد بنجاح']);
         } catch (\Exception $ex) {
             return $ex;
             DB::rollBack();

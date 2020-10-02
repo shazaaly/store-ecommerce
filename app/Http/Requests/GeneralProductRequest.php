@@ -4,8 +4,9 @@ namespace App\Http\Requests;
 
 use App\Http\Enumeration\CategoryType;
 use Illuminate\Foundation\Http\FormRequest;
+use phpDocumentor\Reflection\Types\Nullable;
 
-class MainCategoryRequest extends FormRequest
+class GeneralProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,14 +27,18 @@ class MainCategoryRequest extends FormRequest
     {
 
         $rules = [
-            'name' => 'required',
-           'slug' => 'required|unique:categories,slug,.$this->id',
+            'name' => 'required|max:100',
+            'slug' => 'required|unique:products,slug',
+            'description' => 'required|max:1000',
+            'short_description' => 'nullable|max:500',
+            'categories' => 'array|min:1', //[]
+            'categories.*' => 'numeric|exists:categories,id',
+            'tags' => 'nullable',
+            'brand_id' => 'required|exists:brands,id'
+
         ];
-        foreach(CategoryType::getAll() as $key => $val)
-        {
-            $rules[$key] = 'required|in:'.$val;
-        }
         return $rules;
+
 
     }
 
